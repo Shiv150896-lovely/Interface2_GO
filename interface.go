@@ -1,50 +1,79 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
-type Human interface {
-	PrintData(Data []int)
+type Person interface {
+	Task()
+	Addition(a, b int)
 }
 
-type Person struct {
-	Name  string
-	Age   int
-	Email string
+type x int
+
+func (x) Addition(a, b int) {
+	fmt.Println("addition....", a+b)
 }
 
-func (p Person) PrintData(Data []int) {
-	for _, value := range Data {
-		fmt.Println("Slice Data :- ", value)
-	}
-	fmt.Println("this is a person..")
+func (x) Task() {
+	fmt.Println("task.....")
 }
 
 func main() {
-	p := Person{Name: "shiv", Age: 29, Email: "ershivkumarrana@gmail.com"}
-	slice := []int{2, 1, 3, 4}
-	// var h Human = p
-	byteData, err := json.Marshal(p)
+	var a x
+	var p Person = a
+	p.Task()
+	p.Addition(1, 20)
 
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("json Marshal message", string(byteData))
-	per := &Person{}
-	err = json.Unmarshal(byteData, per)
-	if err != nil {
-		fmt.Println(" UnMarshal Message :-", err)
-	}
-	fmt.Println(*per)
-	fmt.Println(per.Name, per.Age, per.Email)
-	fmt.Printf("Unmarshalled Person: %+v\n", *per)
-
-	p.PrintData(slice)
-
-	fmt.Println("second interface...")
 }
+
+//----------------------------marshal-unmarshal-interface-passing value in method-----------------
+
+// package main
+
+// import (
+// 	"encoding/json"
+// 	"fmt"
+// )
+
+// type Human interface {
+// 	PrintData(Data []int)
+// }
+
+// type Person struct {
+// 	Name  string
+// 	Age   int
+// 	Email string
+// }
+
+// func (p Person) PrintData(Data []int) {
+// 	for _, value := range Data {
+// 		fmt.Println("Slice Data :- ", value)
+// 	}
+// 	fmt.Println("this is a person..")
+// }
+
+// func main() {
+// 	p := Person{Name: "shiv", Age: 29, Email: "ershivkumarrana@gmail.com"}
+// 	slice := []int{2, 1, 3, 4}
+// 	// var h Human = p
+// 	byteData, err := json.Marshal(p)
+
+// 	if err != nil {
+// 		fmt.Println(err)
+// 	}
+// 	fmt.Println("json Marshal message", string(byteData))
+// 	per := &Person{}
+// 	err = json.Unmarshal(byteData, per)
+// 	if err != nil {
+// 		fmt.Println(" UnMarshal Message :-", err)
+// 	}
+// 	fmt.Println(*per)
+// 	fmt.Println(per.Name, per.Age, per.Email)
+// 	fmt.Printf("Unmarshalled Person: %+v\n", *per)
+
+// 	p.PrintData(slice)
+
+// 	fmt.Println("second interface...")
+// }
 
 //-------------------------------
 // package main
